@@ -1,6 +1,6 @@
 # SyscallViewer
 
-Simple python-based CFG visualization tool to help with RE of binaries. Requires angr, networkx and ida installed.
+Simple python-based CFG visualization tool to help with RE of binaries. Requires angr, dot, networkx and ida installed.
 
 ##  Concept:
 I've generally found that when REing looking at the control flow + syscalls and debug statements helped me form a useful initial picture of the binary. I thought it might be useful to have a tool that just extracts a subset of the decompiled syscalls per function and mapped it into a basic function-level CFG. Decided to try writing a tool using angr/ida to have a look at how effective it might be.
@@ -12,7 +12,11 @@ It might be better to write an IDA/angr plugin that does the same except backwar
 Overall I had fun writing this little tool, and it does seem potentially useful to my own work REing weird firmware binaries, which tend to be just convoluted masses of logging messages and syscalls.
 
 ## Usage:
-python3 sysviewer.py <binary_path>
+`python3 sysviewer.py <binary_path>`
+
+This generates a .dot file that can be converted into a viewable form with dot, or opened with any visualization program like gephi.
+
+`dot -Tpdf <binary>.dot -o <binary>.pdf`
 
 - You will also need to set the global IDA_PATH to both `idat` and `idat64` so we can invoke the ida decompiler.
 
