@@ -139,6 +139,7 @@ class Graph():
                         node_contents += "\n%s" % sysdetails
                         done.add(sysdetails)
 
+        print(" - adding node", node.name)
         self.graph.add_node(node.addr)
         self.node_content_map[node.addr] = node_contents
         # if len(node.syscalls) > 0:
@@ -182,7 +183,7 @@ class Graph():
             print("Filter cycle %d" % count)
             prevNumNodes = len(self.graph.nodes)
             outdeg = self.graph.out_degree()
-            to_remove = [n for (n, deg) in outdeg if deg <= 0 and (isinstance(n, int) or "\n" in str(n))]
+            to_remove = [n for (n, deg) in outdeg if deg <= 0 and (isinstance(n, int) or "\n" not in str(n))]
             self.graph.remove_nodes_from(to_remove)
             currNumNodes = len(self.graph.nodes)
 
